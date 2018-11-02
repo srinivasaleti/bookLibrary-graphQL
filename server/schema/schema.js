@@ -4,22 +4,23 @@ const _ = require('lodash')
 const {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLSchema
+    GraphQLSchema,
+    GraphQLList
 } = graphql;
 
 //dummy data
 var books = [{
         name: 'Wings of fire',
-        genere: 'Fantacy',
+        gener: 'Fantacy',
         id: "1",
     }, {
         name: 'Harry Potter',
-        genere: 'Fantacy',
+        gener: 'Fantacy',
         id: "2",
     },
     {
         name: 'The logn earth',
-        genere: 'Sci-Fi',
+        gener: 'Sci-Fi',
         id: "3",
     }
 ]
@@ -53,6 +54,12 @@ const RootQuery = new GraphQLObjectType({
                 return _.find(books, {
                     id: args.id
                 })
+            }
+        },
+        books:{
+            type: new GraphQLList(BookType),
+            resolve(parent, args) {
+                return books
             }
         }
     }
