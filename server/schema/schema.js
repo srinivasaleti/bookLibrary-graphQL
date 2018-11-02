@@ -1,6 +1,8 @@
 const graphql = require('graphql')
 const booksQuery =  require('./queries/bookQuery')
 const authorsQuery = require('./queries/authorQuery')
+const Book = require('../modules/book')
+const Author = require('../modules/author')
 
 const {
     GraphQLObjectType,
