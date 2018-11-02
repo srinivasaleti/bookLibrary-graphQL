@@ -1,6 +1,7 @@
 const graphql = require('graphql')
 const _ = require('lodash')
 const BookResolver = require('../resolvoers/bookResolver')
+const AuthorResolver = require('../resolvoers/authorResolver')
 
 const {
     GraphQLObjectType,
@@ -8,7 +9,23 @@ const {
     GraphQLSchema,
     GraphQLList,
     GraphQLID,
+    GraphQLInt
 } = graphql;
+
+const AuthorType = new GraphQLObjectType({
+    name: 'Author',
+    fields: () => ({
+        id: {
+            type: GraphQLID
+        },
+        name: {
+            type: GraphQLString
+        },
+        age: {
+            type: GraphQLInt
+        }
+    })
+})
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
@@ -43,6 +60,23 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(BookType),
             resolve(parent, args) {
                 return BookResolver.allBooks()
+            }
+        },
+        author: {
+            type: AuthorType,
+            args: {
+                id: {
+                    type: GraphQLID
+                }
+            },
+            resolve(parent, args) {
+                return AuthorResolver.getAuthorById(args.id);
+            }
+        },
+        authors: {
+            type: new GraphQLList(AuthorType),
+            resolve(parent, args) {
+                return AuthorResolver.allAuthros()
             }
         }
     }
