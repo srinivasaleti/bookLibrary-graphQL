@@ -1,43 +1,33 @@
 const _ = require('lodash')
-
-//dummy data
-var books = [{
-        name: 'Wings of fire',
-        gener: 'Fantacy',
-        id: "1",
-        authorId: "1",
-    }, {
-        name: 'Harry Potter',
-        gener: 'Fantacy',
-        id: "2",
-        authorId: "1",
-    },
-    {
-        name: 'The logn earth',
-        gener: 'Sci-Fi',
-        id: "3",
-        authorId: "3",
-    }
-]
+const Book = require('../modules/book')
 
 const getBookById = (id) => {
-    return _.find(books, {
-        id
-    })
+    return Book.findById(id)
 }
 
 const allBooks = () => {
-    return books
+    return Book.find({})
 }
 
-const getBooksWirttenBy = (authorId) => {    
-    return _.filter(books, {
+const addBook = (args) => {
+    let book = Book({
+        name: args.name,
+        gener: args.gener,
+        authorId: args.authorId
+    })
+
+    return book.save()
+}
+
+const getBooksWirttenBy = (authorId) => {
+    return Book.find({
         authorId
-    });
+    })
 }
 
 module.exports = {
+    getBooksWirttenBy,
+    addBook,
     getBookById,
     allBooks,
-    getBooksWirttenBy
 }

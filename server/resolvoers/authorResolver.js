@@ -1,33 +1,24 @@
 var _ = require('lodash')
+const Author = require('../modules/author')
 
-var authors = [{
-        name: 'Abdul kalam',
-        age: 45,
-        id: "1",
-    },
-    {
-        name: 'Brandon Sanderson',
-        age: 42,
-        id: '2'
-    },
-    {
-        name: 'Srinivas Aleti',
-        age: 23,
-        id: '3'
-    },
-]
+const addAuthor = (args) => {
+    let author = new Author({
+        name: args.name,
+        age: args.age
+    });
+    return author.save()
+}
 
 const allAuthros = () => {
-    return authors;
+    return Author.find({})
 }
 
 const getAuthorById = (id) => {
-    return _.find(authors, {
-        id
-    })
+    return Author.findById(id)
 }
 
 module.exports = {
+    addAuthor,
     allAuthros,
-    getAuthorById
+    getAuthorById,
 }
