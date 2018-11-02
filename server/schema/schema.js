@@ -5,7 +5,8 @@ const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLSchema,
-    GraphQLList
+    GraphQLList,
+    GraphQLID
 } = graphql;
 
 //dummy data
@@ -29,7 +30,7 @@ const BookType = new GraphQLObjectType({
     name: 'Book',
     fields: () => ({
         id: {
-            type: GraphQLString
+            type: GraphQLID
         },
         name: {
             type: GraphQLString
@@ -47,7 +48,7 @@ const RootQuery = new GraphQLObjectType({
             type: BookType,
             args: {
                 id: {
-                    type: GraphQLString
+                    type: GraphQLID
                 }
             },
             resolve(parent, args) {
