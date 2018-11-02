@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const app = express()
 
 //connection to mongodb
-mongoose.connect("mongodb://srinu:test123@ds149593.mlab.com:49593/srinu")
+mongoose.connect("mongodb://127.0.0.1:27017/srinu")
 
 mongoose.connection.once('open', () => {
     console.log("Connected to database")
