@@ -1,30 +1,16 @@
 const graphql = require('graphql')
 const BookResolver = require('../../resolvoers/bookResolver')
+const types = require('../types')
 
 const {
-    GraphQLObjectType,
-    GraphQLString,
     GraphQLID,
     GraphQLList
 } = graphql;
 
-const BookType = new GraphQLObjectType({
-    name: 'Book',
-    fields: () => ({
-        id: {
-            type: GraphQLID
-        },
-        name: {
-            type: GraphQLString
-        },
-        gener: {
-            type: GraphQLString
-        }
-    })
-})
+
 
 const getBookByIdQuery = {
-    type: BookType,
+    type: types.BookType,
     args: {
         id: {
             type: GraphQLID
@@ -36,14 +22,13 @@ const getBookByIdQuery = {
 }
 
 const getAllBooksQuery = {
-    type: new GraphQLList(BookType),
+    type: new GraphQLList(types.BookType),
     resolve(parent, args) {
         return BookResolver.allBooks()
     }
 }
 
 module.exports = {
-    BookType,
     getBookByIdQuery,
     getAllBooksQuery,
 }

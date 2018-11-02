@@ -1,38 +1,22 @@
 const graphql = require('graphql')
 const AuthorResolver = require('../../resolvoers/authorResolver')
+const types = require('../types')
 
 const {
-    GraphQLObjectType,
-    GraphQLString,
     GraphQLID,
-    GraphQLInt,
     GraphQLList
 } = graphql;
 
-const AuthorType = new GraphQLObjectType({
-    name: 'Author',
-    fields: () => ({
-        id: {
-            type: GraphQLID
-        },
-        name: {
-            type: GraphQLString
-        },
-        age: {
-            type: GraphQLInt
-        }
-    })
-})
 
 const getAllAuthorsQuery = {
-    type: new GraphQLList(AuthorType),
+    type: new GraphQLList(types.AuthorType),
     resolve(parent, args) {
         return AuthorResolver.allAuthros()
     }
 }
 
 const getAuthorByIdQuery = {
-    type: AuthorType,
+    type: types.AuthorType,
     args: {
         id: {
             type: GraphQLID
@@ -44,7 +28,6 @@ const getAuthorByIdQuery = {
 }
 
 module.exports = {
-    AuthorType,
     getAllAuthorsQuery,
     getAuthorByIdQuery
 }

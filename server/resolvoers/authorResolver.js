@@ -2,7 +2,7 @@ var _ = require('lodash')
 
 var authors = [{
         name: 'Wings of fire',
-        gener: 'Fantacy',
+        age: 45,
         id: "1",
     },
     {
