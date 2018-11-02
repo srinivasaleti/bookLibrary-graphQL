@@ -7,8 +7,6 @@ const {
     GraphQLList
 } = graphql;
 
-
-
 const getBookByIdQuery = {
     type: types.BookType,
     args: {

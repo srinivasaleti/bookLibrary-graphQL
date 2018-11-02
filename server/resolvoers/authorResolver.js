@@ -1,7 +1,7 @@
 var _ = require('lodash')
 
 var authors = [{
-        name: 'Wings of fire',
+        name: 'Abdul kalam',
         age: 45,
         id: "1",
     },

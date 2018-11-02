@@ -7,7 +7,6 @@ const {
     GraphQLList
 } = graphql;
 
-
 const getAllAuthorsQuery = {
     type: new GraphQLList(types.AuthorType),
     resolve(parent, args) {
