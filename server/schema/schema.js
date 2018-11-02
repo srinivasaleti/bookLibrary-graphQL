@@ -1,30 +1,14 @@
 const graphql = require('graphql')
 const _ = require('lodash')
+const BookResolver = require('../resolvoers/bookResolver')
 
 const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLSchema,
     GraphQLList,
-    GraphQLID
+    GraphQLID,
 } = graphql;
-
-//dummy data
-var books = [{
-        name: 'Wings of fire',
-        gener: 'Fantacy',
-        id: "1",
-    }, {
-        name: 'Harry Potter',
-        gener: 'Fantacy',
-        id: "2",
-    },
-    {
-        name: 'The logn earth',
-        gener: 'Sci-Fi',
-        id: "3",
-    }
-]
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
@@ -52,15 +36,13 @@ const RootQuery = new GraphQLObjectType({
                 }
             },
             resolve(parent, args) {
-                return _.find(books, {
-                    id: args.id
-                })
+                return BookResolver.getBookById(args.id);
             }
         },
-        books:{
+        books: {
             type: new GraphQLList(BookType),
             resolve(parent, args) {
-                return books
+                return BookResolver.allBooks()
             }
         }
     }
